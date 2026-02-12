@@ -5,5 +5,6 @@ class ApiConfig {
   static const Map<String, String> defaultHeaders = {
     'Content-Type': 'application/json',
     'ngrok-skip-browser-warning': 'true',
+    'Authorization': 'Basic YWRtaW46bWVkaWNhbF9nZW5haQ==', // admin:medical_genai
   };
 }

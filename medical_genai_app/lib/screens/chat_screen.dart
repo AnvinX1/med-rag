@@ -3,6 +3,7 @@ import '../models.dart';
 import '../services/api_service.dart';
 import '../widgets/message_bubble.dart';
 import '../widgets/typing_indicator.dart';
+import '../widgets/chat_drawer.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -96,6 +97,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final cs = Theme.of(context).colorScheme;
 
     return Scaffold(
+      drawer: const ChatDrawer(),
       appBar: AppBar(
         title: Row(
           children: [

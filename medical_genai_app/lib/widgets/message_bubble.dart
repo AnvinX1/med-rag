@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import '../models.dart';
+import 'typewriter_markdown.dart';
 
 class MessageBubble extends StatelessWidget {
   final ChatMessage message;
@@ -12,7 +14,7 @@ class MessageBubble extends StatelessWidget {
     final isUser = message.role == 'user';
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.symmetric(vertical: 8), // More spacing
       child: Row(
         mainAxisAlignment: isUser
             ? MainAxisAlignment.end
@@ -20,12 +22,23 @@ class MessageBubble extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!isUser) ...[
-            CircleAvatar(
-              radius: 16,
-              backgroundColor: cs.primary,
-              child: Icon(Icons.monitor_heart, size: 16, color: cs.onPrimary),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                border: Border.all(color: cs.outlineVariant.withOpacity(0.5)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Icon(Icons.auto_awesome, size: 16, color: cs.primary),
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width: 12),
           ],
           Flexible(
             child: Column(
@@ -35,79 +48,109 @@ class MessageBubble extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 10,
+                    horizontal: 16,
+                    vertical: 12,
                   ),
                   decoration: BoxDecoration(
-                    color: isUser ? cs.primary : cs.surfaceContainerHighest,
+                    color: isUser ? cs.primary : Colors.white,
+                    border: isUser ? null : Border.all(color: cs.outlineVariant.withOpacity(0.5)),
                     borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(16),
-                      topRight: const Radius.circular(16),
-                      bottomLeft: Radius.circular(isUser ? 16 : 4),
-                      bottomRight: Radius.circular(isUser ? 4 : 16),
+                      topLeft: const Radius.circular(20),
+                      topRight: const Radius.circular(20),
+                      bottomLeft: Radius.circular(isUser ? 20 : 4),
+                      bottomRight: Radius.circular(isUser ? 4 : 20),
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
-                  child: SelectableText(
-                    message.content,
-                    style: TextStyle(
-                      fontSize: 13.5,
-                      height: 1.5,
-                      color: isUser ? cs.onPrimary : cs.onSurface,
-                    ),
-                  ),
+                  child: isUser
+                      ? SelectableText(
+                          message.content,
+                          style: TextStyle(
+                            fontSize: 15,
+                            height: 1.5,
+                            color: cs.onPrimary,
+                          ),
+                        )
+                      : MarkdownBody(
+                          data: message.content,
+                          styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                             p: const TextStyle(fontSize: 15, height: 1.6, color: Color(0xFF334155)),
+                             h1: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
+                             h2: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
+                             h3: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF0F172A)),
+                             listBullet: const TextStyle(color: Color(0xFF0D9488)),
+                          ),
+                        ),
+                     // TODO: Re-enable TypewriterMarkdown once we handle streaming state properly
+                     // or if we decide to use it for all static messages too.
+                     // For now, static markdown is safer for completed messages.
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
                 // Sources & metadata
                 if (!isUser && message.sources.isNotEmpty)
                   Wrap(
-                    spacing: 4,
-                    runSpacing: 4,
+                    spacing: 6,
+                    runSpacing: 6,
                     children: [
-                      const Icon(Icons.source, size: 11, color: Colors.grey),
                       ...message.sources.map(
                         (s) => Container(
                           padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 2,
+                            horizontal: 8,
+                            vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: cs.surfaceContainerHighest,
-                            borderRadius: BorderRadius.circular(8),
+                            color: const Color(0xFFF1F5F9),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: const Color(0xFFE2E8F0)),
                           ),
-                          child: Text(
-                            s.split('/').last,
-                            style: const TextStyle(
-                              fontSize: 9,
-                              color: Colors.grey,
-                            ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.description_outlined, size: 12, color: Color(0xFF64748B)),
+                              const SizedBox(width: 4),
+                              Text(
+                                s.split('/').last,
+                                style: const TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFF475569),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
                     ],
                   ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (message.processingTime != null)
-                      Text(
-                        '${message.processingTime!.toStringAsFixed(1)}s  •  ',
-                        style: const TextStyle(fontSize: 9, color: Colors.grey),
-                      ),
-                    Text(
-                      '${message.timestamp.hour.toString().padLeft(2, '0')}:${message.timestamp.minute.toString().padLeft(2, '0')}',
-                      style: const TextStyle(fontSize: 9, color: Colors.grey),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),
           if (isUser) ...[
-            const SizedBox(width: 8),
-            CircleAvatar(
-              radius: 16,
-              backgroundColor: cs.primaryContainer,
-              child: Icon(Icons.person, size: 16, color: cs.onPrimaryContainer),
+            const SizedBox(width: 12),
+            Container(
+              padding: const EdgeInsets.all(2), // Border width
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: CircleAvatar(
+                radius: 16,
+                backgroundColor: cs.primaryContainer,
+                child: Icon(Icons.person, size: 18, color: cs.onPrimaryContainer),
+              ),
             ),
           ],
         ],
