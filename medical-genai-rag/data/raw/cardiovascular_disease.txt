@@ -1,0 +1,95 @@
+CARDIOVASCULAR DISEASE: CLINICAL REVIEW
+
+1. Overview
+
+Cardiovascular disease (CVD) remains the leading cause of morbidity and mortality worldwide, accounting for approximately 17.9 million deaths annually. CVD encompasses a range of conditions affecting the heart and blood vessels, including coronary artery disease, cerebrovascular disease, peripheral arterial disease, and heart failure.
+
+2. Coronary Artery Disease (CAD)
+
+2.1 Pathophysiology
+Atherosclerosis is the primary pathological process underlying CAD. It begins with endothelial dysfunction, which allows LDL cholesterol to penetrate the arterial intima. Oxidized LDL triggers an inflammatory response, recruiting monocytes that differentiate into macrophages. These macrophages engulf lipids to become foam cells, forming fatty streaks. Over time, smooth muscle cells migrate from the media, and a fibrous cap forms over the lipid core, creating an atherosclerotic plaque.
+
+Plaque rupture or erosion exposes thrombogenic material, leading to platelet activation and thrombus formation. This can result in partial or complete vessel occlusion, manifesting as unstable angina or acute myocardial infarction, respectively.
+
+2.2 Risk Factors
+Non-modifiable: Age, sex (male), family history of premature CVD
+Modifiable: Hypertension, dyslipidemia, diabetes mellitus, smoking, obesity, physical inactivity, unhealthy diet, excessive alcohol consumption
+
+2.3 Clinical Presentations
+- Stable Angina: Chest pain or discomfort triggered by exertion or emotional stress, relieved by rest or nitroglycerin
+- Unstable Angina: New-onset, increasing, or rest angina without troponin elevation
+- NSTEMI: Unstable angina with troponin elevation but without ST-segment elevation
+- STEMI: Acute MI with ST-segment elevation on ECG, indicating transmural ischemia
+
+3. Hypertension
+
+3.1 Classification (ACC/AHA 2017)
+- Normal: <120/80 mmHg
+- Elevated: 120-129/<80 mmHg
+- Stage 1: 130-139/80-89 mmHg
+- Stage 2: ≥140/90 mmHg
+- Hypertensive Crisis: >180/120 mmHg
+
+3.2 Pathophysiology
+Essential hypertension (90-95% of cases) involves complex interactions between genetic predisposition, renal sodium handling, the renin-angiotensin-aldosterone system (RAAS), sympathetic nervous system activation, and endothelial dysfunction. Secondary hypertension may result from renal disease, endocrine disorders, or medications.
+
+3.3 Treatment
+Lifestyle: DASH diet, sodium restriction (<2300 mg/day), regular exercise, weight management, limiting alcohol, smoking cessation
+Pharmacological:
+- ACE inhibitors (enalapril, lisinopril) - block angiotensin II formation
+- ARBs (losartan, valsartan) - block angiotensin II receptors
+- Calcium channel blockers (amlodipine, diltiazem) - reduce vascular resistance
+- Thiazide diuretics (hydrochlorothiazide, chlorthalidone) - reduce blood volume
+- Beta-blockers (metoprolol, atenolol) - reduce heart rate and contractility
+
+4. Heart Failure
+
+4.1 Definition
+Heart failure (HF) is a clinical syndrome in which the heart is unable to pump sufficient blood to meet the body's metabolic demands, or can do so only at elevated filling pressures.
+
+4.2 Classification
+By ejection fraction:
+- HFrEF (Heart Failure with Reduced EF): LVEF ≤40%
+- HFmrEF (Mid-range): LVEF 41-49%
+- HFpEF (Preserved EF): LVEF ≥50%
+
+NYHA Functional Classification:
+- Class I: No limitation of physical activity
+- Class II: Slight limitation, comfortable at rest
+- Class III: Marked limitation, comfortable only at rest
+- Class IV: Unable to carry on any physical activity without discomfort
+
+4.3 Management
+Pharmacological therapy for HFrEF:
+- ACE inhibitors/ARBs/ARNI (sacubitril/valsartan)
+- Beta-blockers (carvedilol, metoprolol succinate, bisoprolol)
+- Mineralocorticoid receptor antagonists (spironolactone, eplerenone)
+- SGLT2 inhibitors (dapagliflozin, empagliflozin)
+- Diuretics for volume management
+- Hydralazine/isosorbide dinitrate in selected patients
+- Ivabradine for heart rate control
+
+Device therapy:
+- ICD (Implantable Cardioverter-Defibrillator) for primary/secondary prevention
+- CRT (Cardiac Resynchronization Therapy) for LBBB with LVEF ≤35%
+
+5. Stroke
+
+5.1 Ischemic Stroke (87% of all strokes)
+Caused by thrombotic or embolic occlusion of a cerebral artery. Risk factors include atrial fibrillation, carotid stenosis, hypertension, and diabetes. Acute treatment includes IV alteplase (within 4.5 hours) and mechanical thrombectomy (within 24 hours for large vessel occlusion).
+
+5.2 Hemorrhagic Stroke
+Includes intracerebral hemorrhage (ICH) and subarachnoid hemorrhage (SAH). ICH is most commonly caused by hypertension. SAH is typically caused by ruptured cerebral aneurysms.
+
+6. Prevention
+
+Primary prevention strategies:
+- Blood pressure control (<130/80 mmHg)
+- Lipid management (LDL <100 mg/dL, or <70 mg/dL in high-risk)
+- Diabetes management (HbA1c <7%)
+- Smoking cessation
+- Regular physical activity (150 min/week moderate or 75 min/week vigorous)
+- Healthy diet (Mediterranean or DASH pattern)
+- Weight management (BMI 18.5-24.9)
+- Aspirin therapy in selected high-risk patients
+- Statin therapy based on ASCVD risk assessment

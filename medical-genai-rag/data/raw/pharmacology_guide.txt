@@ -1,0 +1,114 @@
+PHARMACOLOGY OF COMMON MEDICATIONS: A CLINICAL GUIDE
+
+1. Analgesics
+
+1.1 Non-Steroidal Anti-Inflammatory Drugs (NSAIDs)
+Mechanism: Inhibit cyclooxygenase (COX) enzymes, reducing prostaglandin synthesis
+- COX-1: Constitutive enzyme involved in gastric mucosal protection, platelet aggregation, and renal blood flow
+- COX-2: Inducible enzyme primarily involved in inflammation and pain
+
+Common NSAIDs:
+- Ibuprofen: Non-selective COX inhibitor. Dose: 200-800mg q6-8h. Max: 3200mg/day
+- Naproxen: Non-selective, longer half-life. Dose: 250-500mg q12h
+- Celecoxib: Selective COX-2 inhibitor. Dose: 100-200mg q12h
+- Aspirin: Irreversibly inhibits COX-1, used for antiplatelet therapy at low doses (75-325mg)
+
+Adverse effects: GI bleeding, renal impairment, cardiovascular risk (especially COX-2 selective), hypertension
+
+1.2 Acetaminophen (Paracetamol)
+Mechanism: Central inhibition of COX, exact mechanism not fully understood
+Dose: 325-1000mg q4-6h. Max: 4000mg/day (2000mg in liver disease)
+Adverse effects: Hepatotoxicity in overdose (antidote: N-acetylcysteine)
+
+1.3 Opioids
+Mechanism: Activate mu, kappa, and delta opioid receptors in the CNS and periphery
+- Morphine: Gold standard, IV/oral. 10mg IV = 30mg oral
+- Oxycodone: Semi-synthetic, oral. 1.5x potency of morphine
+- Fentanyl: Synthetic, 50-100x more potent than morphine. Transdermal and IV forms
+- Tramadol: Weak opioid + SNRI properties. Lower abuse potential
+- Codeine: Prodrug converted to morphine by CYP2D6
+
+Adverse effects: Respiratory depression, constipation, nausea, sedation, tolerance, dependence
+
+2. Antibiotics
+
+2.1 Beta-Lactams
+Mechanism: Inhibit cell wall synthesis by binding penicillin-binding proteins (PBPs)
+- Penicillins: Amoxicillin, ampicillin (gram-positive coverage + some gram-negative)
+- Amoxicillin-clavulanate: Extended spectrum with beta-lactamase inhibitor
+- Cephalosporins: Cephalexin (1st gen), cefuroxime (2nd), ceftriaxone (3rd), cefepime (4th)
+- Carbapenems: Meropenem, imipenem (broadest spectrum)
+
+2.2 Fluoroquinolones
+Mechanism: Inhibit DNA gyrase (gram-negative) and topoisomerase IV (gram-positive)
+- Ciprofloxacin: Gram-negative coverage, UTIs, GI infections
+- Levofloxacin: Respiratory infections, broader coverage
+- Moxifloxacin: Enhanced gram-positive and anaerobic coverage
+Adverse effects: Tendinopathy, QT prolongation, CNS effects, C. difficile risk
+
+2.3 Macrolides
+Mechanism: Bind 50S ribosomal subunit, inhibit translocation
+- Azithromycin: Long half-life, 5-day course. Community-acquired pneumonia, STIs
+- Clarithromycin: H. pylori triple therapy, respiratory infections
+Adverse effects: GI upset, QT prolongation, drug interactions (CYP3A4)
+
+3. Cardiovascular Medications
+
+3.1 Statins
+Mechanism: HMG-CoA reductase inhibitors - reduce cholesterol synthesis
+- Atorvastatin: High-intensity (40-80mg), low-intensity (10-20mg)
+- Rosuvastatin: Most potent (5-40mg)
+- Simvastatin: Moderate intensity, more drug interactions
+Adverse effects: Myopathy, rhabdomyolysis (rare), hepatotoxicity, diabetes risk
+
+3.2 Antihypertensives
+ACE Inhibitors (enalapril, lisinopril, ramipril):
+- Block conversion of angiotensin I to angiotensin II
+- Side effects: Dry cough, hyperkalemia, angioedema, teratogenic
+
+ARBs (losartan, valsartan, olmesartan):
+- Block AT1 receptors
+- Similar benefits to ACEi without cough
+- Side effects: Hyperkalemia, teratogenic
+
+Calcium Channel Blockers:
+- Dihydropyridines (amlodipine, nifedipine): Vasodilation
+- Non-dihydropyridines (diltiazem, verapamil): Also reduce heart rate
+
+4. Psychiatric Medications
+
+4.1 Antidepressants
+SSRIs (Selective Serotonin Reuptake Inhibitors):
+- Fluoxetine, sertraline, paroxetine, citalopram, escitalopram
+- First-line for depression and anxiety
+- Side effects: GI upset, sexual dysfunction, serotonin syndrome risk
+
+SNRIs (Serotonin-Norepinephrine Reuptake Inhibitors):
+- Venlafaxine, duloxetine, desvenlafaxine
+- Also useful for neuropathic pain and fibromyalgia
+- Side effects: Similar to SSRIs plus hypertension at higher doses
+
+4.2 Anxiolytics
+Benzodiazepines:
+- Diazepam, lorazepam, alprazolam, clonazepam
+- Enhance GABA-A receptor activity
+- Risks: Dependence, respiratory depression, falls in elderly
+
+Buspirone:
+- 5-HT1A partial agonist
+- Non-sedating, no dependence risk
+- Slower onset (2-4 weeks)
+
+5. Diabetes Medications
+
+5.1 Metformin
+Mechanism: Reduces hepatic glucose output, increases insulin sensitivity
+First-line for T2DM. Dose: 500-2000mg/day
+Adverse effects: GI upset, lactic acidosis (rare), B12 deficiency
+
+5.2 Insulin
+Types by onset/duration:
+- Rapid-acting: Lispro, aspart, glulisine (onset 15min, duration 3-5h)
+- Short-acting: Regular insulin (onset 30min, duration 6-8h)
+- Intermediate: NPH (onset 2h, duration 12-18h)
+- Long-acting: Glargine, detemir, degludec (onset 2-4h, duration 20-42h)

@@ -1,0 +1,76 @@
+DIABETES MELLITUS: A COMPREHENSIVE OVERVIEW
+
+1. Introduction
+
+Diabetes mellitus is a group of metabolic diseases characterized by chronic hyperglycemia resulting from defects in insulin secretion, insulin action, or both. The chronic hyperglycemia of diabetes is associated with long-term damage, dysfunction, and failure of various organs, especially the eyes, kidneys, nerves, heart, and blood vessels.
+
+2. Classification
+
+2.1 Type 1 Diabetes Mellitus
+Type 1 diabetes (T1DM) results from autoimmune destruction of the insulin-producing beta cells in the pancreas. This form accounts for 5-10% of all diabetes cases. It is characterized by absolute insulin deficiency and requires exogenous insulin administration for survival. T1DM typically presents in childhood or adolescence but can occur at any age. Genetic susceptibility is associated with HLA-DR3 and HLA-DR4 alleles. Autoantibodies including GAD65, IA-2, and insulin autoantibodies serve as markers of the autoimmune process.
+
+2.2 Type 2 Diabetes Mellitus
+Type 2 diabetes (T2DM) accounts for 90-95% of all diabetes cases. It is characterized by insulin resistance and relative (rather than absolute) insulin deficiency. Risk factors include obesity, physical inactivity, family history, advancing age, and certain ethnicities. T2DM is increasingly diagnosed in children and adolescents due to rising obesity rates. The pathophysiology involves impaired insulin secretion by pancreatic beta cells, increased hepatic glucose production, and decreased peripheral glucose uptake.
+
+2.3 Gestational Diabetes
+Gestational diabetes mellitus (GDM) is defined as glucose intolerance first recognized during pregnancy. It occurs in approximately 2-10% of pregnancies. Risk factors include advanced maternal age, obesity, family history of diabetes, and prior history of GDM. Women with GDM have an increased risk of developing T2DM later in life.
+
+3. Diagnosis
+
+Diagnostic criteria for diabetes include:
+- Fasting plasma glucose (FPG) ≥126 mg/dL (7.0 mmol/L)
+- 2-hour plasma glucose ≥200 mg/dL (11.1 mmol/L) during an OGTT
+- HbA1c ≥6.5% (48 mmol/mol)
+- Random plasma glucose ≥200 mg/dL (11.1 mmol/L) with classic symptoms
+
+Prediabetes is diagnosed when:
+- FPG 100-125 mg/dL (impaired fasting glucose)
+- 2-hour PG 140-199 mg/dL (impaired glucose tolerance)
+- HbA1c 5.7-6.4%
+
+4. Complications
+
+4.1 Microvascular Complications
+- Diabetic Retinopathy: Leading cause of blindness in working-age adults. Involves damage to retinal blood vessels leading to non-proliferative and proliferative changes.
+- Diabetic Nephropathy: Progressive kidney disease that may lead to end-stage renal disease. Characterized by persistent albuminuria and declining GFR.
+- Diabetic Neuropathy: Affects up to 50% of patients. Includes peripheral neuropathy (sensory loss, pain), autonomic neuropathy (gastroparesis, orthostatic hypotension), and focal neuropathies.
+
+4.2 Macrovascular Complications
+- Cardiovascular Disease: 2-4x increased risk of coronary artery disease, stroke, and peripheral vascular disease.
+- Cerebrovascular Disease: Increased risk of ischemic stroke.
+- Peripheral Arterial Disease: Can lead to claudication, non-healing ulcers, and amputation.
+
+5. Treatment
+
+5.1 Lifestyle Modifications
+- Medical nutrition therapy with individualized meal planning
+- Regular physical activity (150 minutes/week of moderate-intensity exercise)
+- Weight management
+- Diabetes self-management education
+
+5.2 Pharmacological Treatment
+First-line: Metformin (biguanide) - reduces hepatic glucose production, improves insulin sensitivity
+Second-line options:
+- Sulfonylureas (glipizide, glyburide) - stimulate insulin secretion
+- DPP-4 inhibitors (sitagliptin) - enhance incretin action
+- GLP-1 receptor agonists (liraglutide, semaglutide) - improve glucose-dependent insulin secretion
+- SGLT2 inhibitors (empagliflozin, dapagliflozin) - reduce renal glucose reabsorption
+- Thiazolidinediones (pioglitazone) - improve insulin sensitivity
+- Insulin therapy - various formulations (rapid-acting, short-acting, intermediate, long-acting)
+
+6. Monitoring
+
+- HbA1c: Target <7% for most adults (individualized)
+- Self-monitoring of blood glucose (SMBG)
+- Continuous glucose monitoring (CGM)
+- Annual screening for complications (eye exam, foot exam, kidney function)
+- Lipid profile and blood pressure monitoring
+
+7. Prevention
+
+Type 2 diabetes prevention strategies include:
+- Weight loss of 5-7% of body weight
+- Regular physical activity
+- Healthy dietary patterns
+- Metformin therapy in high-risk individuals
+- Regular screening for those with risk factors

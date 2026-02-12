@@ -1,0 +1,40 @@
+
+name: Mobile CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'medical_genai_app/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'medical_genai_app/**'
+
+jobs:
+  test-mobile:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./medical_genai_app
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up tools
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.19.0'
+        channel: 'stable'
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Analyze
+      run: flutter analyze
+
+    - name: Run tests
+      run: flutter test
+
+    - name: Build APK (Debug)
+      run: flutter build apk --debug

@@ -1,0 +1,38 @@
+
+name: Web CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'medical-genai-ui/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'medical-genai-ui/**'
+
+jobs:
+  test-web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./medical-genai-ui
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+        cache-dependency-path: medical-genai-ui/package-lock.json
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Lint
+      run: npm run lint
+
+    - name: Build
+      run: npm run build

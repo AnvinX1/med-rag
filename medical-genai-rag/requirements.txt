@@ -1,0 +1,29 @@
+# ===== Core ML / GenAI =====
+torch>=2.1.0
+transformers>=4.36.0
+accelerate>=0.25.0
+peft>=0.7.0
+bitsandbytes>=0.41.0
+datasets>=2.14.0
+trl>=0.7.0
+
+# ===== RAG =====
+langchain>=0.1.0
+langchain-community>=0.0.10
+langchain-huggingface>=0.0.1
+faiss-cpu>=1.7.4
+sentence-transformers>=2.2.2
+
+# ===== Data Processing =====
+PyPDF2>=3.0.0
+pymupdf>=1.23.0
+
+# ===== API =====
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+
+# ===== Utilities =====
+python-dotenv>=1.0.0
+tqdm>=4.66.0
+rich>=13.7.0
