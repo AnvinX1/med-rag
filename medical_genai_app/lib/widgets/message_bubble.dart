@@ -77,19 +77,24 @@ class MessageBubble extends StatelessWidget {
                             color: cs.onPrimary,
                           ),
                         )
-                      : MarkdownBody(
-                          data: message.content,
-                          styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
-                             p: const TextStyle(fontSize: 15, height: 1.6, color: Color(0xFF334155)),
-                             h1: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
-                             h2: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
-                             h3: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF0F172A)),
-                             listBullet: const TextStyle(color: Color(0xFF0D9488)),
-                          ),
-                        ),
-                     // TODO: Re-enable TypewriterMarkdown once we handle streaming state properly
-                     // or if we decide to use it for all static messages too.
-                     // For now, static markdown is safer for completed messages.
+                      : (message.hasAnimated
+                          ? MarkdownBody(
+                              data: message.content,
+                              styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                                p: const TextStyle(fontSize: 15, height: 1.6, color: Color(0xFF334155)),
+                                h1: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
+                                h2: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
+                                h3: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF0F172A)),
+                                listBullet: const TextStyle(color: Color(0xFF0D9488)),
+                              ),
+                            )
+                          : TypewriterMarkdown(
+                              text: message.content,
+                              duration: const Duration(milliseconds: 30), // Slower for better performance
+                              onComplete: () {
+                                message.hasAnimated = true;
+                              },
+                            )),
                 ),
                 const SizedBox(height: 6),
                 // Sources & metadata

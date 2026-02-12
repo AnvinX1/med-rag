@@ -4,6 +4,7 @@ import '../services/api_service.dart';
 import '../widgets/message_bubble.dart';
 import '../widgets/typing_indicator.dart';
 import '../widgets/chat_drawer.dart';
+import '../services/database_service.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -14,11 +15,13 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final _api = ApiService();
+  final _db = DatabaseService();
   final _controller = TextEditingController();
   final _scrollController = ScrollController();
   final _focusNode = FocusNode();
   final List<ChatMessage> _messages = [];
   bool _isLoading = false;
+  String? _currentSessionId;
 
   static const _suggestions = [
     'What are the symptoms of diabetes?',
@@ -39,40 +42,89 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _initSession();
+  }
+
+  Future<void> _initSession() async {
+    final sessions = await _db.getSessions();
+    if (sessions.isNotEmpty) {
+      _currentSessionId = sessions.first.id;
+      await _loadMessages(_currentSessionId!);
+    } else {
+      await _startNewChat();
+    }
+  }
+
+  Future<void> _loadMessages(String sessionId) async {
+    final messages = await _db.getMessages(sessionId);
+    setState(() {
+      _messages.clear();
+      _messages.addAll(messages);
+      _currentSessionId = sessionId;
+    });
+    if (_messages.isNotEmpty) {
+      _scrollToBottom();
+    }
+  }
+
+  Future<void> _startNewChat() async {
+    final newId = await _db.createSession();
+    setState(() {
+      _currentSessionId = newId;
+      _messages.clear();
+      _isLoading = false;
+      _controller.clear();
+    });
+  }
+
   Future<void> _sendMessage(String text) async {
     if (text.trim().length < 3 || _isLoading) return;
+    if (_currentSessionId == null) await _startNewChat();
+
+    // Update title if first message
+    if (_messages.isEmpty) {
+      await _db.updateSessionTitle(_currentSessionId!, text.trim());
+    }
+
+    final userMsg = ChatMessage(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      sessionId: _currentSessionId!,
+      role: 'user',
+      content: text.trim(),
+    );
 
     setState(() {
-      _messages.add(
-        ChatMessage(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
-          role: 'user',
-          content: text.trim(),
-        ),
-      );
+      _messages.add(userMsg);
       _isLoading = true;
       _controller.clear();
     });
     _scrollToBottom();
+    await _db.insertMessage(userMsg);
 
     try {
       final response = await _api.askQuestion(text.trim());
+      final aiMsg = ChatMessage(
+        id: '${DateTime.now().millisecondsSinceEpoch}_ai',
+        sessionId: _currentSessionId!,
+        role: 'assistant',
+        content: response.answer,
+        sources: response.sources,
+        processingTime: response.processingTime,
+      );
+
       setState(() {
-        _messages.add(
-          ChatMessage(
-            id: '${DateTime.now().millisecondsSinceEpoch}_ai',
-            role: 'assistant',
-            content: response.answer,
-            sources: response.sources,
-            processingTime: response.processingTime,
-          ),
-        );
+        _messages.add(aiMsg);
       });
+      await _db.insertMessage(aiMsg);
     } catch (e) {
       setState(() {
         _messages.add(
           ChatMessage(
             id: '${DateTime.now().millisecondsSinceEpoch}_err',
+            sessionId: _currentSessionId!,
             role: 'assistant',
             content: 'Error: ${e.toString().replaceAll('Exception: ', '')}',
           ),
@@ -97,7 +149,13 @@ class _ChatScreenState extends State<ChatScreen> {
     final cs = Theme.of(context).colorScheme;
 
     return Scaffold(
-      drawer: const ChatDrawer(),
+      drawer: ChatDrawer(
+        currentSessionId: _currentSessionId,
+        onNewChat: _startNewChat,
+        onSessionSelected: (sessionId) {
+          _loadMessages(sessionId);
+        },
+      ),
       appBar: AppBar(
         title: Row(
           children: [
@@ -126,12 +184,11 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
         actions: [
-          if (_messages.isNotEmpty)
-            IconButton(
-              icon: const Icon(Icons.delete_sweep_outlined, size: 20),
-              onPressed: () => setState(() => _messages.clear()),
-              tooltip: 'Clear chat',
-            ),
+          IconButton(
+            icon: const Icon(Icons.add_comment_outlined, size: 20),
+            onPressed: _startNewChat,
+            tooltip: 'New Chat',
+          ),
         ],
       ),
       body: Column(

@@ -1,19 +1,78 @@
+import 'dart:convert';
+
 class ChatMessage {
   final String id;
+  final String sessionId;
   final String role;
   final String content;
   final List<String> sources;
   final double? processingTime;
-  final DateTime timestamp;
+  DateTime timestamp;
+  bool hasAnimated;
 
   ChatMessage({
     required this.id,
+    required this.sessionId,
     required this.role,
     required this.content,
     this.sources = const [],
     this.processingTime,
     DateTime? timestamp,
+    this.hasAnimated = false,
   }) : timestamp = timestamp ?? DateTime.now();
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'sessionId': sessionId,
+      'role': role,
+      'content': content,
+      'sources': jsonEncode(sources),
+      'processingTime': processingTime,
+      'timestamp': timestamp.millisecondsSinceEpoch,
+    };
+  }
+
+  factory ChatMessage.fromMap(Map<String, dynamic> map) {
+    return ChatMessage(
+      id: map['id'],
+      sessionId: map['sessionId'] ?? 'default',
+      role: map['role'],
+      content: map['content'],
+      sources: List<String>.from(jsonDecode(map['sources'] ?? '[]')),
+      processingTime: map['processingTime'],
+      timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp']),
+      hasAnimated: true, // Always true when loading from history
+    );
+  }
+}
+
+class ChatSession {
+  final String id;
+  final String title;
+  final DateTime timestamp;
+
+  ChatSession({
+    required this.id,
+    required this.title,
+    required this.timestamp,
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'timestamp': timestamp.millisecondsSinceEpoch,
+    };
+  }
+
+  factory ChatSession.fromMap(Map<String, dynamic> map) {
+    return ChatSession(
+      id: map['id'],
+      title: map['title'],
+      timestamp: DateTime.fromMillisecondsSinceEpoch(map['timestamp']),
+    );
+  }
 }
 
 class AskResponse {

@@ -1,7 +1,39 @@
 import 'package:flutter/material.dart';
+import '../models.dart';
+import '../services/database_service.dart';
+import 'package:intl/intl.dart';
 
-class ChatDrawer extends StatelessWidget {
-  const ChatDrawer({super.key});
+class ChatDrawer extends StatefulWidget {
+  final VoidCallback onNewChat;
+  final Function(String) onSessionSelected;
+  final String? currentSessionId;
+
+  const ChatDrawer({
+    super.key,
+    required this.onNewChat,
+    required this.onSessionSelected,
+    this.currentSessionId,
+  });
+
+  @override
+  State<ChatDrawer> createState() => _ChatDrawerState();
+}
+
+class _ChatDrawerState extends State<ChatDrawer> {
+  final _db = DatabaseService();
+  late Future<List<ChatSession>> _sessionsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshSessions();
+  }
+
+  void _refreshSessions() {
+    setState(() {
+      _sessionsFuture = _db.getSessions();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +56,8 @@ class ChatDrawer extends StatelessWidget {
               children: [
                 OutlinedButton.icon(
                   onPressed: () {
-                    Navigator.pop(context);
-                    // TODO: Implement New Chat logic
+                    Navigator.pop(context); // Close drawer
+                    widget.onNewChat(); // Trigger new chat
                   },
                   icon: const Icon(Icons.add_rounded, size: 20),
                   label: const Text('New Chat'),
@@ -43,23 +75,31 @@ class ChatDrawer extends StatelessWidget {
 
           // History List
           Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              children: [
-                _buildHistorySection(context, 'Today', [
-                  'Diabetes Symptoms & Treatment',
-                  'ACE Inhibitors Mechanism',
-                ]),
-                _buildHistorySection(context, 'Yesterday', [
-                  'Hypertension Guidelines 2024',
-                  'Pediatric Dosage Calculation',
-                  'Antibiotic Resistance Patterns',
-                ]),
-                _buildHistorySection(context, 'Previous 7 Days', [
-                  'Differential Diagnosis: Chest Pain',
-                  'Metformin Side Effects',
-                ]),
-              ],
+            child: FutureBuilder<List<ChatSession>>(
+              future: _sessionsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'No history yet',
+                      style: TextStyle(color: cs.onSurfaceVariant),
+                    ),
+                  );
+                }
+
+                final sessions = snapshot.data!;
+                final grouped = _groupSessions(sessions);
+
+                return ListView(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  children: grouped.entries.map((entry) {
+                    return _buildHistorySection(context, entry.key, entry.value);
+                  }).toList(),
+                );
+              },
             ),
           ),
 
@@ -85,23 +125,39 @@ class ChatDrawer extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Dr. User',
-                      style: textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Dr. User',
+                        style: textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'Pro Plan',
-                      style: textTheme.bodySmall?.copyWith(
-                        color: cs.onSurfaceVariant,
-                        fontSize: 11,
+                      Text(
+                        'Pro Plan',
+                        style: textTheme.bodySmall?.copyWith(
+                          color: cs.onSurfaceVariant,
+                          fontSize: 11,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.delete_outline, size: 20, color: cs.error),
+                  tooltip: 'Delete Session',
+                  onPressed: widget.currentSessionId == null
+                      ? null
+                      : () async {
+                          if (widget.currentSessionId != null) {
+                            await _db.deleteSession(widget.currentSessionId!);
+                            _refreshSessions();
+                            widget.onNewChat(); // Reset to new chat
+                            if (context.mounted) Navigator.pop(context);
+                          }
+                        },
                 ),
               ],
             ),
@@ -111,8 +167,36 @@ class ChatDrawer extends StatelessWidget {
     );
   }
 
+  Map<String, List<ChatSession>> _groupSessions(List<ChatSession> sessions) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = today.subtract(const Duration(days: 1));
+    final lastWeek = today.subtract(const Duration(days: 7));
+
+    final Map<String, List<ChatSession>> groups = {};
+
+    for (var session in sessions) {
+      final date = session.timestamp;
+      final sessionDate = DateTime(date.year, date.month, date.day);
+
+      String key;
+      if (sessionDate == today || sessionDate.isAfter(today)) {
+        key = 'Today';
+      } else if (sessionDate == yesterday) {
+        key = 'Yesterday';
+      } else if (sessionDate.isAfter(lastWeek)) {
+        key = 'Previous 7 Days';
+      } else {
+        key = 'Older';
+      }
+
+      groups.putIfAbsent(key, () => []).add(session);
+    }
+    return groups;
+  }
+
   Widget _buildHistorySection(
-      BuildContext context, String title, List<String> items) {
+      BuildContext context, String title, List<ChatSession> items) {
     final cs = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,26 +220,39 @@ class ChatDrawer extends StatelessWidget {
             ],
           ),
         ),
-        ...items.map((item) => ListTile(
-              dense: true,
-              visualDensity: VisualDensity.compact,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-              leading: Icon(Icons.chat_bubble_outline_rounded,
-                  size: 16, color: cs.onSurfaceVariant.withAlpha(150)),
-              minLeadingWidth: 20,
-              title: Text(
-                item,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: cs.onSurface.withAlpha(200),
-                ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+        ...items.map((session) {
+          final isSelected = session.id == widget.currentSessionId;
+          return ListTile(
+            dense: true,
+            visualDensity: VisualDensity.compact,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+            selected: isSelected,
+            selectedTileColor: cs.primaryContainer.withAlpha(50),
+            leading: Icon(
+              Icons.chat_bubble_outline_rounded,
+              size: 16,
+              color: isSelected ? cs.primary : cs.onSurfaceVariant.withAlpha(150),
+            ),
+            minLeadingWidth: 20,
+            title: Text(
+              session.title,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                color: isSelected ? cs.primary : cs.onSurface.withAlpha(200),
               ),
-              onTap: () {
-                // TODO: Load chat history
-              },
-            )),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              widget.onSessionSelected(session.id);
+            },
+            trailing: isSelected
+                ? Icon(Icons.check, size: 14, color: cs.primary)
+                : null,
+          );
+        }),
         const SizedBox(height: 12),
       ],
     );
